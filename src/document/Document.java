@@ -50,10 +50,25 @@ public abstract class Document {
 	// next week when we implement the EfficientDocument class.
 	protected int countSyllables(String word)
 	{
-		// TODO: Implement this method so that you can call it from the 
-	    // getNumSyllables method in BasicDocument (module 1) and 
-	    // EfficientDocument (module 2).
-	    return 0;
+		int count = 0;
+		boolean isPrevVowel = false;
+		for (int j = 0; j < word.length(); j++) {
+	    	char c = word.charAt(j);
+	    	
+	        if (word.contains("a") || word.contains("e") || word.contains("i") || word.contains("o") || word.contains("u") || word.contains("y")) {
+	        	boolean isVowel = (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y');
+	            if (isVowel && !isPrevVowel) {
+	            	count++;
+	            	isPrevVowel = true;
+	            } else if (!isVowel) {
+	            	isPrevVowel = false;
+	            }
+	        } else {
+	            count++;
+	            break;
+	        }
+	    }
+	    return count;
 	}
 	
 	/** A method for testing

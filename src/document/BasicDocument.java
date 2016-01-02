@@ -72,9 +72,21 @@ public class BasicDocument extends Document
 	@Override
 	public int getNumSyllables()
 	{
-	    //TODO: Implement this method.  See the Module 1 support videos 
-        // if you need help.
-        return 0;
+		int count = 0;
+	    String text = this.getText().toLowerCase();
+	    text = text.replaceAll("[-,.():!0-9?]", "");
+	    text = text.replaceAll("[a]+", "a");
+	    text = text.replaceAll("[e]+", "e");
+	    text = text.replaceAll("[i]+", "i");
+	    text = text.replaceAll("[o]+", "o");
+	    text = text.replaceAll("[u]+", "u");
+	    text = text.replaceAll("e[ .,-]+|e$", " ");
+	    String[] textArr = text.split("[ ]+");
+	    
+	    for (int i = 0; i < textArr.length; i++) {
+	    	count += countSyllables(textArr[i]);
+	    }
+	    return count;
 	}
 	
 	
@@ -98,7 +110,6 @@ public class BasicDocument extends Document
 		testCase(new BasicDocument("Sentences?!"), 3, 1, 1);
 		testCase(new BasicDocument("Lorem ipsum dolor sit amet, qui ex choro quodsi moderatius, nam dolores explicari forensibus ad."),
 		         32, 15, 1);
-		
 		
 	}
 	
